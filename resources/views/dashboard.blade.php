@@ -1,36 +1,17 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-<div class="card">
-    <div class="card-header">Dashboard</div>
-
-    <div class="card-body">
-        <h2>Welcome to the Warehouse Management System</h2>
-        <p>You are logged in as {{ auth()->user()->username }}.</p>
-        
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <h5 class="card-title">Inventory Management</h5>
-                        <p class="card-text">Manage warehouse items, check stock levels, and update inventory.</p>
-                        <a href="{{ route('warehouse.index') }}" class="btn btn-primary">View Inventory</a>
-                    </div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    {{ __("You're logged in!") }}
                 </div>
             </div>
-
-            @if(auth()->user()->role === 'admin')
-            <div class="col-md-4">
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <h5 class="card-title">Admin Controls</h5>
-                        <p class="card-text">Access administrative controls and user management.</p>
-                        <a href="#" class="btn btn-warning">Admin Panel</a>
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

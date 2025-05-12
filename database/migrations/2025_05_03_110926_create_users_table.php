@@ -9,13 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    // database/migrations/xxxx_xx_xx_create_users_table.php
+public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('username', 50)->unique();
+        $table->string('password');
+        $table->enum('role', ['admin', 'user'])->default('user');
+        $table->timestamps(); // Adds created_at and updated_at columns
+    });
+}
 
     /**
      * Reverse the migrations.

@@ -2,29 +2,29 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\AdminMiddleware;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
-class RouteServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
-    // Other methods and properties...
-    
     /**
-     * Define your route model bindings, pattern filters, etc.
+     * The model to policy mappings for the application.
      *
-     * @return void
+     * @var array<class-string, class-string>
      */
-    public function boot()
+    protected $policies = [
+        //
+    ];
+
+    /**
+     * Register any authentication / authorization services.
+     */
+    public function boot(): void
     {
-        // Other boot code...
-        
-        // Register your middleware
-        Route::middleware('admin', AdminMiddleware::class);
-        
-        // Rest of boot method...
+        // Define an 'admin' gate that checks if the user has admin role
+        Gate::define('admin', function (User $user) {
+            return $user->isAdmin();
+        });
     }
 }
